@@ -18,3 +18,11 @@ function stubEndpointForHttpRequest(url, json) {
 
 $.mockjaxSettings.logging = false;
 $.mockjaxSettings.responseTime = 0;
+
+
+function _f(label) {
+  var hash =
+    {'パターン一覧': 'table tr',
+    'パターン名一覧': 'table tr td.name'};
+  return find(hash[label]);
+}

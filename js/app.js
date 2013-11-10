@@ -2,63 +2,57 @@ App = Ember.Application.create();
 
 App.Router.map(function() {
     this.resource("other", { path: "/" });
-    this.resource("people", { path: "/people" });
+    this.resource("patterns", { path: "/patterns" });
 });
+
+App.PatternsRoute = Ember.Route.extend({
+    model: function() {
+        return App.Pattern.find();
+    }
+});
+
+
 
 App.OtherRoute = Ember.Route.extend({
     redirect: function() {
-        this.transitionTo('people');
+        this.transitionTo('patterns');
     }
 });
 
-App.PeopleRoute = Ember.Route.extend({
-    model: function() {
-        return App.Person.find();
-    }
-});
-
-App.PeopleController = Ember.ArrayController.extend({
+App.PatternsController = Ember.ArrayController.extend({
     actions: {
-        addPerson: function() {
-            var person = {
-                firstName: this.get('firstName'),
-                lastName: this.get('lastName')
+        addPattern: function() {
+            var pattern = {
+                name: this.get('name'),
             };
-            App.Person.add(person);
+            App.Pattern.add(pattern);
         },
-        deletePerson: function(person) {
-            App.Person.remove(person);
-        }
     }
 });
 
-App.Person = Ember.Object.extend({
-    firstName: '',
-    lastName: '',
-    fullName: function() {
-        var firstName = this.get('firstName');
-        var lastName = this.get('lastName');
-        return firstName + ' ' + lastName;
-    }.property('firstName', 'lastName')
+
+App.Pattern = Ember.Object.extend({
+    name: '',
+    context: '',
+    problem: '',
+    solution: '',
+    result: ''
 });
 
-App.Person.reopenClass({
-    people: [],
+App.Pattern.reopenClass({
+    patterns: [],
     add: function(hash) {
-        var person = App.Person.create(hash);
-        this.people.pushObject(person);
-    },
-    remove: function(person) {
-        this.people.removeObject(person);
+        var pattern = App.Pattern.create(hash);
+        this.patterns.pushObject(pattern);
     },
     find: function() {
         var self = this;
-        $.getJSON('/api/people', function(response) {
+        $.getJSON('/api/patterns', function(response) {
             response.forEach(function(hash) {
-                var person = App.Person.create(hash);
-                Ember.run(self.people, self.people.pushObject, person);
+                var pattern = App.Pattern.create(hash);
+                Ember.run(self.patterns, self.patterns.pushObject, pattern);
             });
         }, this);
-        return this.people;
+        return this.patterns;
     }
 });
