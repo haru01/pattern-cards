@@ -1,13 +1,16 @@
-<div id='pattern'>
-  hogehoge
-{{input class="name" type="text" placeholder="name" value=name }}
-<button class="submit" {{action addPattern}}>Add</button>
-<br />
-<table>
-{{#each pattern in controller}}
-<tr>
-  <td class="name">{{pattern.name}}</td>
-</tr>
+
+{{#each controller}}
+<article class='.parttern' style='width:380px;height:250px;border: medium solid #008080;margin: 5px 5px;padding:10px;
+overflow: hidden;
+display: block; float:left; font-size:13px'>
+<span contenteditable='true'>{{name}}</span>
+<HR align="10%">
+<section contenteditable='true'></section>
+  ***
+<section contenteditable='true'></section>
+したがって
+<section contenteditable='true'></section>
+***
+<section contenteditable='true'></section>
+</article>
 {{/each}}
-</table>
-</div>

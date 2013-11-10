@@ -7,7 +7,11 @@ App.Router.map(function() {
 
 App.PatternsRoute = Ember.Route.extend({
     model: function() {
-        return App.Pattern.find();
+        App.Pattern.add({name: "リーダブルコード"});
+        for (var i = 50 - 1; i >= 0; i--) {
+            App.Pattern.add({name: "..."});
+        };
+        return App.Pattern.patterns;
     }
 });
 
