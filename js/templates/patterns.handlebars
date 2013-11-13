@@ -3,7 +3,8 @@
 <article class='.parttern' style='width:380px;height:250px;border: medium solid #008080;margin: 5px 5px;padding:10px;
 overflow: hidden;
 display: block; float:left; font-size:13px'>
-<span contenteditable='true'>{{name}}</span>
+
+{{#view App.ContentEditable contentBinding="this" class="name"}}{{name}}{{/view}}
 <HR align="10%">
 <section contenteditable='true'></section>
   ***

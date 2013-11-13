@@ -8,7 +8,8 @@ App.Router.map(function() {
 App.PatternsRoute = Ember.Route.extend({
     model: function() {
         App.Pattern.add({name: "リーダブルコード"});
-        for (var i = 50 - 1; i >= 0; i--) {
+        App.Pattern.add({name: "All Green"});
+        for (var i = 2 - 1; i >= 0; i--) {
             App.Pattern.add({name: "..."});
         };
         return App.Pattern.patterns;
@@ -25,22 +26,12 @@ App.OtherRoute = Ember.Route.extend({
 
 App.PatternsController = Ember.ArrayController.extend({
     actions: {
-        addPattern: function() {
-            var pattern = {
-                name: this.get('name'),
-            };
-            App.Pattern.add(pattern);
-        },
     }
 });
 
 
 App.Pattern = Ember.Object.extend({
-    name: '',
-    context: '',
-    problem: '',
-    solution: '',
-    result: ''
+    name: ''
 });
 
 App.Pattern.reopenClass({
@@ -48,15 +39,17 @@ App.Pattern.reopenClass({
     add: function(hash) {
         var pattern = App.Pattern.create(hash);
         this.patterns.pushObject(pattern);
-    },
-    find: function() {
-        var self = this;
-        $.getJSON('/api/patterns', function(response) {
-            response.forEach(function(hash) {
-                var pattern = App.Pattern.create(hash);
-                Ember.run(self.patterns, self.patterns.pushObject, pattern);
-            });
-        }, this);
-        return this.patterns;
     }
 });
+
+App.ContentEditable = Ember.View.extend({
+    tagName: "section",
+    contenteditable: "true",
+    attributeBindings: ["contenteditable"],
+
+    focusOut: function(event) {
+        console.log(event);
+        console.log(this.get('content').get('name'));
+    },
+});
+
