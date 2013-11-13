@@ -47,9 +47,8 @@ App.ContentEditable = Ember.View.extend({
     contenteditable: "true",
     attributeBindings: ["contenteditable"],
 
-    focusOut: function(event) {
-        console.log(event);
-        console.log(this.get('content').get('name'));
-    },
+    focusOut: function(e) {
+        this.set('content.name', this.$().text());
+        console.log(this.get('content.name'));
+    }
 });
-
