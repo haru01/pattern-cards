@@ -4,10 +4,10 @@
 overflow: hidden;
 display: block; float:left; font-size:13px'>
 
-{{#view App.ContentEditable contentBinding="this" class="name"}}{{name}}{{/view}}
+{{#view App.ContentEditable contentBinding="this" class="name" key='name'}}{{name}}{{/view}}
 
 <HR align="10%">
-<section contenteditable='true'></section>
+{{#view App.ContentEditable contentBinding="this" class="context" key='context'}}{{context}}{{/view}}
   ***
 <section contenteditable='true'></section>
 したがって

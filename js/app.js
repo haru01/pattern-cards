@@ -30,9 +30,7 @@ App.PatternsController = Ember.ArrayController.extend({
 });
 
 
-App.Pattern = Ember.Object.extend({
-    name: ''
-});
+App.Pattern = Ember.Object.extend({});
 
 App.Pattern.reopenClass({
     patterns: [],
@@ -48,7 +46,8 @@ App.ContentEditable = Ember.View.extend({
     attributeBindings: ["contenteditable"],
 
     focusOut: function(e) {
-        this.set('content.name', this.$().text());
-        console.log(this.get('content.name'));
+        this.set('content.' + this.get('key'), this.$().text());
+        console.log(this.get('context.name'));
+        console.log(this.get('context.context'));
     }
 });
